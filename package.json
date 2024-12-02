@@ -1,0 +1,42 @@
+{
+  "name": "@superhero/http-server",
+  "version": "4.0.0",
+  "description": "HTTP(S) server component supporting both HTTP 1.1 and HTTP 2.0",
+  "keywords": [
+    "http server",
+    "http2 server",
+    "http2",
+    "http 2.0",
+    "http 1.1",
+    "https"
+  ],
+  "main": "index.js",
+  "license": "MIT",
+  "type": "module",
+  "exports": {
+    ".": "./index.js",
+    "./view": "./view.js",
+    "./*/*/*": "./*/*/*.js",
+    "./*/*/*/*": "./*/*/*/*.js",
+    "./*/*/*/*/*": "./*/*/*/*/*.js",
+    "./*/*/*/*/*/*": "./*/*/*/*/*/*.js"
+  },
+  "dependencies": {
+    "@superhero/router": "^4.0.5"
+  },
+  "devDependencies": {
+    "@superhero/locator": "^4.1.1",
+    "@superhero/http-request": "^4.0.9"
+  },
+  "scripts": {
+    "test": "node --trace-warnings --test --experimental-test-coverage"
+  },
+  "author": {
+    "name": "Erik Landvall",
+    "email": "erik@landvall.se"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/superhero/http-server"
+  }
+}

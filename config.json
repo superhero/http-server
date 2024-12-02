@@ -1,0 +1,18 @@
+{
+  "bootstrap": 
+  {
+    "@superhero/http-server": true
+  },
+  "locator":
+  {
+    "@superhero/http-server": true
+  },
+  "http-server":
+  {
+    "server": {},
+    "router":
+    {
+      "routes": {}
+    }
+  }
+}
