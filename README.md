@@ -1,5 +1,5 @@
 
-# HTTP-server
+# HTTP-Server
 
 An HTTP server module for Node.js that supports both HTTP/1.1 and HTTP/2 protocols, with built-in routing, HTTPS support, and stream support that defaults to server-sent events (SSE). Designed to be robust, flexible and extendible, while easy to work with.
 
