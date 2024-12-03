@@ -5,7 +5,10 @@
   },
   "locator":
   {
-    "@superhero/http-server": true
+    "@superhero/http-server": true,
+    "@superhero/http-server/middleware/*/*": "./middleware/*/*.js",
+    "@superhero/http-server/middleware/*/*/*": "./middleware/*/*/*.js",
+    "@superhero/http-server/middleware/*/*/*/*/*": "./middleware/*/*/*/*/*.js"
   },
   "http-server":
   {

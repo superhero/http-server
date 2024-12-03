@@ -314,132 +314,142 @@ npm test
 ```
 ▶ @superhero/http-server
   ▶ Lifecycle
-    ✔ Can instantiate HttpServer (8.419758ms)
-    ✔ Can bootstrap server with non-secure settings (2.635146ms)
-    ✔ Listens and closes the server as expected (3.349393ms)
-    ✔ Rejects if server is not available to listen error (2.108227ms)
-    ✔ Rejects if server is not available to close error (1.792574ms)
-  ✔ Lifecycle (19.74534ms)
-
+    ✔ Can instantiate HttpServer (8.609311ms)
+    ✔ Can bootstrap server with non-secure settings (2.813603ms)
+    ✔ Can be configured by the configuration file (37.159723ms)
+    ✔ Listens and closes the server as expected (5.81708ms)
+    ✔ Rejects if server is not available to listen error (2.290967ms)
+    ✔ Rejects if server is not available to close error (1.058432ms)
+  ✔ Lifecycle (59.459503ms)
+  
   ▶ Routing and Requests
     ▶ HTTP/1
-      ✔ Can dispatch a request aligned to the route map (39.125646ms)
-      ✔ Can alter the output body (5.52864ms)
-      ✔ Can stream HTML5 standard Server-Sent Events (SSE) (7.515151ms)
-      ✔ Can alter the output headers (6.829782ms)
-      ✔ Can alter the output status (5.509801ms)
-      ✔ Can abort the dispatcher (6.059604ms)
-      ✔ Can describe an abortion in detail (6.212658ms)
-      ✔ Can manage thrown errors in the dispatcher (6.902106ms)
-      ✔ Can not mistakenly access the wrong view property (4.354173ms)
-      ✔ Can not mistakenly assign a value to the wrong view property (7.322497ms)
-      ✔ Support connection keep-alive header (6.339005ms)
-    ✔ HTTP/1 (103.550623ms)
+      ✔ Can dispatch a request aligned to the route map (42.67787ms)
+      ✔ Can alter the output body (5.709405ms)
+      ✔ Can stream HTML5 standard Server-Sent Events (SSE) (9.72838ms)
+      ✔ Can alter the output headers (9.330729ms)
+      ✔ Can alter the output status (7.159825ms)
+      ✔ Can abort the dispatcher (5.969359ms)
+      ✔ Can describe an abortion in detail (7.225311ms)
+      ✔ Can manage thrown errors in the dispatcher (10.332202ms)
+      ✔ Can not mistakenly access the wrong view property (7.490531ms)
+      ✔ Can not mistakenly assign a value to the wrong view property (5.522195ms)
+      ✔ Support connection keep-alive header (10.362687ms)
+    ✔ HTTP/1 (122.952777ms)
 
     ▶ HTTP/2
-      ✔ Can dispatch a request aligned to the route map (67.303149ms)
-      ✔ Can alter the output body (6.051175ms)
-      ✔ Can stream HTML5 standard Server-Sent Events (SSE) (5.646976ms)
-      ✔ Can alter the output headers (4.816813ms)
-      ✔ Can alter the output status (8.330617ms)
-      ✔ Can abort the dispatcher (6.803324ms)
-      ✔ Can describe an abortion in detail (4.771987ms)
-      ✔ Can manage thrown errors in the dispatcher (6.57489ms)
-      ✔ Can not mistakenly access the wrong view property (4.451118ms)
-      ✔ Can not mistakenly assign a value to the wrong view property (4.587527ms)
-    ✔ HTTP/2 (120.216844ms)
-  ✔ Routing and Requests (224.037442ms)
+      ✔ Can dispatch a request aligned to the route map (24.833859ms)
+      ✔ Can alter the output body (8.516916ms)
+      ✔ Can stream HTML5 standard Server-Sent Events (SSE) (10.336142ms)
+      ✔ Can alter the output headers (8.209538ms)
+      ✔ Can alter the output status (7.35682ms)
+      ✔ Can abort the dispatcher (8.554265ms)
+      ✔ Can describe an abortion in detail (5.330231ms)
+      ✔ Can manage thrown errors in the dispatcher (9.391412ms)
+      ✔ Can not mistakenly access the wrong view property (7.222525ms)
+      ✔ Can not mistakenly assign a value to the wrong view property (8.57349ms)
+    ✔ HTTP/2 (99.758519ms)
+  ✔ Routing and Requests (222.916463ms)
 
   ▶ HTTPS server with self-signed certificate
     ▶ TLSv1.2
       ▶ RSA:2048
-        ✔ HTTP1 (9.766994ms)
-        ✔ HTTP2 (10.784857ms)
-      ✔ RSA:2048 (157.12133ms)
+        ✔ HTTP1 (10.68221ms)
+        ✔ HTTP2 (14.607846ms)
+      ✔ RSA:2048 (184.393685ms)
 
       ▶ RSA:4096
-        ✔ HTTP1 (11.566225ms)
-        ✔ HTTP2 (18.136774ms)
-      ✔ RSA:4096 (581.128109ms)
+        ✔ HTTP1 (11.166249ms)
+        ✔ HTTP2 (14.376707ms)
+      ✔ RSA:4096 (239.998059ms)
 
       ▶ ECDSA:P-256
-        ✔ HTTP1 (5.324231ms)
-        ✔ HTTP2 (8.312658ms)
-      ✔ ECDSA:P-256 (50.979123ms)
+        ✔ HTTP1 (6.998372ms)
+        ✔ HTTP2 (9.255564ms)
+      ✔ ECDSA:P-256 (52.737888ms)
 
       ▶ ECDSA:P-384
-        ✔ HTTP1 (6.277003ms)
-        ✔ HTTP2 (9.918662ms)
-      ✔ ECDSA:P-384 (52.076847ms)
+        ✔ HTTP1 (8.610887ms)
+        ✔ HTTP2 (9.7637ms)
+      ✔ ECDSA:P-384 (52.826908ms)
 
       ▶ ECDSA:P-521
-        ✔ HTTP1 (10.988173ms)
-        ✔ HTTP2 (13.745049ms)
-      ✔ ECDSA:P-521 (63.762337ms)
+        ✔ HTTP1 (9.391868ms)
+        ✔ HTTP2 (13.179682ms)
+      ✔ ECDSA:P-521 (62.741409ms)
 
       ▶ EdDSA:Ed25519
-        ✔ HTTP1 (4.940083ms)
-        ✔ HTTP2 (8.791915ms)
-      ✔ EdDSA:Ed25519 (48.717009ms)
+        ✔ HTTP1 (10.110816ms)
+        ✔ HTTP2 (9.99596ms)
+      ✔ EdDSA:Ed25519 (58.01589ms)
 
       ▶ EdDSA:Ed448
-        ✔ HTTP1 (6.589414ms)
-        ✔ HTTP2 (8.132894ms)
-      ✔ EdDSA:Ed448 (50.727502ms)
-    ✔ TLSv1.2 (1005.148618ms)
+        ✔ HTTP1 (4.651357ms)
+        ✔ HTTP2 (10.031462ms)
+      ✔ EdDSA:Ed448 (51.550013ms)
+    ✔ TLSv1.2 (703.01496ms)
 
     ▶ TLSv1.3
       ▶ RSA:2048
-        ✔ HTTP1 (6.038652ms)
-        ✔ HTTP2 (8.748363ms)
-      ✔ RSA:2048 (119.601474ms)
+        ✔ HTTP1 (6.43647ms)
+        ✔ HTTP2 (9.551209ms)
+      ✔ RSA:2048 (113.791235ms)
 
       ▶ RSA:4096
-        ✔ HTTP1 (12.785668ms)
-        ✔ HTTP2 (14.531181ms)
-      ✔ RSA:4096 (622.520543ms)
+        ✔ HTTP1 (18.396852ms)
+        ✔ HTTP2 (22.414178ms)
+      ✔ RSA:4096 (819.288505ms)
 
       ▶ ECDSA:P-256
-        ✔ HTTP1 (6.356325ms)
-        ✔ HTTP2 (10.260146ms)
-      ✔ ECDSA:P-256 (59.91212ms)
+        ✔ HTTP1 (7.036644ms)
+        ✔ HTTP2 (11.842337ms)
+      ✔ ECDSA:P-256 (100.196088ms)
 
       ▶ ECDSA:P-384
-        ✔ HTTP1 (8.192784ms)
-        ✔ HTTP2 (16.138147ms)
-      ✔ ECDSA:P-384 (66.214344ms)
+        ✔ HTTP1 (8.183114ms)
+        ✔ HTTP2 (12.428711ms)
+      ✔ ECDSA:P-384 (61.367513ms)
 
       ▶ ECDSA:P-521
-        ✔ HTTP1 (9.829523ms)
-        ✔ HTTP2 (14.905145ms)
-      ✔ ECDSA:P-521 (71.622241ms)
+        ✔ HTTP1 (12.446168ms)
+        ✔ HTTP2 (15.564381ms)
+      ✔ ECDSA:P-521 (68.39823ms)
 
       ▶ EdDSA:Ed25519
-        ✔ HTTP1 (6.453652ms)
-        ✔ HTTP2 (6.992268ms)
-      ✔ EdDSA:Ed25519 (50.780468ms)
+        ✔ HTTP1 (4.44369ms)
+        ✔ HTTP2 (11.703458ms)
+      ✔ EdDSA:Ed25519 (54.613453ms)
 
       ▶ EdDSA:Ed448
-        ✔ HTTP1 (5.421677ms)
-        ✔ HTTP2 (7.588945ms)
-      ✔ EdDSA:Ed448 (49.520972ms)
-    ✔ TLSv1.3 (1040.826701ms)
-  ✔ HTTPS server with self-signed certificate (2046.10023ms)
-✔ @superhero/http-server (2290.563163ms)
+        ✔ HTTP1 (13.499592ms)
+        ✔ HTTP2 (11.474115ms)
+      ✔ EdDSA:Ed448 (68.423656ms)
+    ✔ TLSv1.3 (1287.220809ms)
+  ✔ HTTPS server with self-signed certificate (1990.42993ms)
+✔ @superhero/http-server (2273.646154ms)
 
-tests 68
+tests 69
 suites 8
-pass 68
+pass 69
 
---------------------------------------------------------------------------------------------------------------
-file            | line % | branch % | funcs % | uncovered lines
---------------------------------------------------------------------------------------------------------------
-index.js        |  91.75 |    91.18 |   74.07 | 92-94 128-129 135-137 266-269 369-373 389-394 397-402 405-410
-index.test.js   | 100.00 |   100.00 |  100.00 | 
-view.js         |  92.98 |    88.89 |   84.21 | 133-138 196-200 238-239 247-253
---------------------------------------------------------------------------------------------------------------
-all files       |  95.31 |    93.68 |   86.61 | 
---------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------
+file                   | line % | branch % | funcs % | uncovered lines
+---------------------------------------------------------------------------------------------------------------------
+index.js               |  91.75 |    91.18 |   74.07 | 92-94 128-129 135-137 266-269 369-373 389-394 397-402 405-410
+index.test.js          | 100.00 |   100.00 |  100.00 | 
+middleware             |        |          |         | 
+ upstream              |        |          |         | 
+  header               |        |          |         | 
+   accept.js           |  19.23 |   100.00 |   33.33 | 10-51
+   content-type.js     |  20.00 |   100.00 |   50.00 | 9-44
+   content-type        |        |          |         | 
+    application        |        |          |         | 
+     json.js           |  31.03 |   100.00 |    0.00 | 9-28
+  method.js            |  23.68 |   100.00 |   50.00 | 9-37
+view.js                |  92.98 |    88.89 |   84.21 | 133-138 196-200 238-239 247-253
+---------------------------------------------------------------------------------------------------------------------
+all files              |  86.57 |    93.96 |   83.82 | 
+---------------------------------------------------------------------------------------------------------------------
 ```
 
 ## License

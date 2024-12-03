@@ -4,6 +4,7 @@ import util         from 'node:util'
 import fs           from 'node:fs'
 import https        from 'node:https'
 import tls          from 'node:tls'
+import Config       from '@superhero/config'
 import Request      from '@superhero/http-request'
 import Router       from '@superhero/router'
 import Locator      from '@superhero/locator'
@@ -11,7 +12,7 @@ import HttpServer   from '@superhero/http-server'
 import { execSync } from 'node:child_process'
 import { afterEach, beforeEach, suite, test } from 'node:test'
 
-util.inspect.defaultOptions.depth = 10
+util.inspect.defaultOptions.depth = 5
 
 suite('@superhero/http-server', () => 
 {
@@ -61,6 +62,25 @@ suite('@superhero/http-server', () =>
 
       assert.ok(server.http2Server)
       assert.ok(server.http2Server.constructor.name === 'Http2Server')
+    })
+
+    test('Can be configured by the configuration file', async () =>
+    {
+      const config = new Config()
+      await config.add('./config.json')
+
+      assert.ok(config.find('bootstrap'))
+      assert.ok(config.find('locator'))
+      assert.ok(config.find('http-server/server'))
+      assert.ok(config.find('http-server/router/routes'))
+
+      await locator.eagerload(config.find('locator'))
+      
+      assert.ok(locator.has('@superhero/http-server'))
+      assert.ok(locator.has('@superhero/http-server/middleware/upstream/method'))
+      assert.ok(locator.has('@superhero/http-server/middleware/upstream/header/accept'))
+      assert.ok(locator.has('@superhero/http-server/middleware/upstream/header/content-type'))
+      assert.ok(locator.has('@superhero/http-server/middleware/upstream/header/content-type/application/json'))
     })
 
     test('Listens and closes the server as expected', async () => 
