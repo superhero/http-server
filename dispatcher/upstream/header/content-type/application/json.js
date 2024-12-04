@@ -1,9 +1,9 @@
 /**
  * Does not validate headers, just assumes that the body is a JSON string
  * 
- * @memberof @superhero/http-server:middleware/upstream/header/content-type/application
+ * @memberof @superhero/http-server:dispatcher/upstream/header/content-type/application
  */
-export default new class ContentTypeApplicationJsonHeaderUpstreamMiddleware
+export default new class ContentTypeApplicationJsonHeaderUpstreamDispatcher
 {
   async dispatch(request, session)
   {
@@ -18,7 +18,7 @@ export default new class ContentTypeApplicationJsonHeaderUpstreamMiddleware
       catch(reason)
       {
         const error   = new Error('The body is not a valid JSON string')
-        error.code    = 'E_HTTP_SERVER_MIDDLEWARE_CONTENT_TYPE_APPLICATION_JSON_INVALID_BODY'
+        error.code    = 'E_HTTP_SERVER_CONTENT_TYPE_HEADER_APPLICATION_JSON'
         error.status  = 400
         error.cause   = 'The buffered body could not be parsed as a JSON string'
 

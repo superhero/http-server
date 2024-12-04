@@ -75,12 +75,12 @@ suite('@superhero/http-server', () =>
       assert.ok(config.find('http-server/router/routes'))
 
       await locator.eagerload(config.find('locator'))
-      
+
       assert.ok(locator.has('@superhero/http-server'))
-      assert.ok(locator.has('@superhero/http-server/middleware/upstream/method'))
-      assert.ok(locator.has('@superhero/http-server/middleware/upstream/header/accept'))
-      assert.ok(locator.has('@superhero/http-server/middleware/upstream/header/content-type'))
-      assert.ok(locator.has('@superhero/http-server/middleware/upstream/header/content-type/application/json'))
+      assert.ok(locator.has('@superhero/http-server/dispatcher/upstream/method'))
+      assert.ok(locator.has('@superhero/http-server/dispatcher/upstream/header/accept'))
+      assert.ok(locator.has('@superhero/http-server/dispatcher/upstream/header/content-type'))
+      assert.ok(locator.has('@superhero/http-server/dispatcher/upstream/header/content-type/application/json'))
     })
 
     test('Listens and closes the server as expected', async () => 

@@ -1,7 +1,7 @@
 /**
- * @memberof @superhero/http-server:middleware/upstream
+ * @memberof @superhero/http-server:dispatcher/upstream
  */
-export default new class MethodUpstreamMiddleware
+export default new class MethodUpstreamDispatcher
 {
   #listFormat = new Intl.ListFormat('en', { style:'long', type:'disjunction' })
 
@@ -28,7 +28,7 @@ export default new class MethodUpstreamMiddleware
       allowed  = supports.map((supported) => supported.replace('method.', '').toUpperCase()).sort(),
       error    = new Error(`The requested resource "${request.url}" does not support method "${request.method}"`)
 
-    error.code    = 'E_HTTP_SERVER_MIDDLEWARE_METHOD_NO_MATCHING_DISPATCHER'
+    error.code    = 'E_HTTP_SERVER_METHOD_NO_ROUTE'
     error.status  = 405
     error.headers = { allow:allowed.join(',') }
     error.cause   = `Supported methods are: ${this.#listFormat.format(allowed) || 'none are defined'}`
