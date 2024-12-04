@@ -9,8 +9,8 @@ export default new class ContentTypeHeaderUpstreamMiddleware
   {
     const
       contentType = request.headers['content-type']?.toLowerCase().split(';')[0].split('*')[0].trim(),
-      routes      = Object.keys(session.route).filter((key) => key.startsWith('content-type-') && session.route[key]),
-      supports    = routes.map((route) => [route.replace('content-type-', '').trim(), route])
+      routes      = Object.keys(session.route).filter((key) => key.startsWith('content-type.') && session.route[key]),
+      supports    = routes.map((route) => [route.replace('content-type.', '').trim(), route])
 
     for(let [supported, route] in supports)
     {

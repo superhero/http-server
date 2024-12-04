@@ -4,14 +4,14 @@
 export default new class AcceptHeaderUpstreamMiddleware
 {
   #listFormat = new Intl.ListFormat('en', { style:'long', type:'disjunction' })
-  #normalize  = (route) => route.replace('accept-', '').trim()
+  #normalize  = (route) => route.replace('accept.', '').trim()
 
   dispatch(request, session)
   {
     const
       splitHeader = request.headers['accept']?.toLowerCase().split(',') || [],
       accepts     = splitHeader.map(this.#normalize),
-      routes      = Object.keys(session.route).filter((key) => key.startsWith('accept-') && session.route[key]),
+      routes      = Object.keys(session.route).filter((key) => key.startsWith('accept.') && session.route[key]),
       supports    = routes.map((route) => [this.#normalize(route), route])
 
     for(let accepted of accepts)
