@@ -46,10 +46,11 @@ export default class View
       headersSent     : { get:() => downstream.headersSent }
     })
 
+    let body = {}
     Object.defineProperties(this,
     {
       // The body property is an object that represents the response body.
-      body    : { enumerable: true, value: {}, set: (value) => deepmerge(this.body, value) },
+      body    : { enumerable: true, get: () => body, set: (value) => body = deepmerge(body, value) },
       // The stream property is a transform stream in object mode that by default encodes objects 
       // as stringified JSON data records according to HTML5 standard Server-Sent Events (SSE).
       stream  : { enumerable: true, configurable: true, get: () => this.#lazyloadStream },
