@@ -285,4 +285,27 @@ export default class View
       }
     }
   }
+
+  toJSON()
+  {
+    const 
+      descriptors = Object.getOwnPropertyDescriptors(this),
+      output      = {}
+
+    for(const property in descriptors)
+    {
+      if(descriptors[property].enumerable)
+      {
+        output[property] = this[property]
+      }
+    }
+
+    return Object(output)
+  }
+
+  // It's useful for debugging and logging to provide a more readable output.
+  [Symbol.for('nodejs.util.inspect.custom')]()
+  {
+    return this.toJSON()
+  }
 }
