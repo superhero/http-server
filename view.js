@@ -24,7 +24,7 @@ export default class View
     const headers = new Proxy({},
     {
       get             : (target, prop) => target[prop] ?? downstream.getHeader(prop),
-      set             : (_, prop, val) => downstream.setHeader(prop, val) || val,
+      set             : (_, prop, val) => downstream.setHeader(prop, val) || true,
       has             : (_, prop)      => downstream.hasHeader(prop),
       deleteProperty  : (_, prop)      => downstream.removeHeader(prop),
       ownKeys         : ()             => downstream.getHeaderNames()
@@ -50,7 +50,7 @@ export default class View
     Object.defineProperties(this,
     {
       // The body property is an object that represents the response body.
-      body    : { enumerable: true, get: () => body, set: (value) => body = deepmerge(body, value) || {}},
+      body    : { enumerable: true, get: () => body, set: (value) => body = deepmerge(body, value) },
       // The stream property is a transform stream in object mode that by default encodes objects 
       // as stringified JSON data records according to HTML5 standard Server-Sent Events (SSE).
       stream  : { enumerable: true, configurable: true, get: () => this.#lazyloadStream },
@@ -94,7 +94,8 @@ export default class View
         if(descriptor?.writable
         || descriptor?.set)
         {
-          return this[property] = value
+          this[property] = value
+          return true
         }
         else
         {
