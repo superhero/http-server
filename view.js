@@ -1,4 +1,5 @@
-import { Transform } from 'stream'
+import deepmerge     from '@superhero/deep/merge'
+import { Transform } from 'node:stream'
 
 /**
  * A view model is a data model specifically designed for the view layer to 
@@ -48,7 +49,7 @@ export default class View
     Object.defineProperties(this,
     {
       // The body property is an object that represents the response body.
-      body    : { enumerable: true, value: {} },
+      body    : { enumerable: true, value: {}, set: (value) => deepmerge(this.body, value) },
       // The stream property is a transform stream in object mode that by default encodes objects 
       // as stringified JSON data records according to HTML5 standard Server-Sent Events (SSE).
       stream  : { enumerable: true, configurable: true, get: () => this.#lazyloadStream },

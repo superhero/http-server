@@ -19,9 +19,9 @@ export default new class ContentTypeHeaderUpstreamDispatcher
     const
       contentType = request.headers['content-type'].toLowerCase().split(';')[0].split('*')[0].trim(),
       routes      = Object.keys(session.route).filter((key) => key.startsWith('content-type.') && session.route[key]),
-      supports    = routes.map((route) => [route.replace('content-type.', '').trim(), route])
+      supports    = routes.map((route) => [ route.replace('content-type.', '').trim(), route ])
 
-    for(let [supported, route] in supports)
+    for(let [ supported, route ] of supports)
     {
       supported = supported.split('*')[0]
 

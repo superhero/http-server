@@ -21,13 +21,13 @@ export default new class AcceptHeaderUpstreamDispatcher
       splitHeader = request.headers['accept']?.toLowerCase().split(',') || [],
       accepts     = splitHeader.map(this.#normalize),
       routes      = Object.keys(session.route).filter((key) => key.startsWith('accept.') && session.route[key]),
-      supports    = routes.map((route) => [this.#normalize(route), route])
+      supports    = routes.map((route) => [ this.#normalize(route), route ])
 
     for(let accepted of accepts)
     {
       accepted = accepted.split(';')[0].split('*')[0]
 
-      for(let [supported, route] in supports)
+      for(let [ supported, route ] of supports)
       {
         supported = supported.split('*')[0]
 

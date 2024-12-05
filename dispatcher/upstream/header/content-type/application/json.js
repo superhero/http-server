@@ -13,16 +13,15 @@ export default new class ContentTypeApplicationJsonHeaderUpstreamDispatcher
     {
       try
       {
-        request.body = JSON.parse(body)
+        request.body = JSON.parse(String(body) || '{}')
       }
       catch(reason)
       {
         const error   = new Error('The body is not a valid JSON string')
         error.code    = 'E_HTTP_SERVER_CONTENT_TYPE_HEADER_APPLICATION_JSON'
         error.status  = 400
-        error.cause   = 'The buffered body could not be parsed as a JSON string'
-
-        session.abortion.abort(error)
+        error.cause   = reason
+        return session.abortion.abort(error)
       }
     }
   }
