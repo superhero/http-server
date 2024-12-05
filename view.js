@@ -50,7 +50,7 @@ export default class View
     Object.defineProperties(this,
     {
       // The body property is an object that represents the response body.
-      body    : { enumerable: true, get: () => body, set: (value) => body = deepmerge(body, value) },
+      body    : { enumerable: true, get: () => body, set: (value) => body = deepmerge(body, value) || {}},
       // The stream property is a transform stream in object mode that by default encodes objects 
       // as stringified JSON data records according to HTML5 standard Server-Sent Events (SSE).
       stream  : { enumerable: true, configurable: true, get: () => this.#lazyloadStream },
@@ -61,7 +61,7 @@ export default class View
       session : { value: session },
       // The status property is an integer representing the status code of the HTTP response.
       status  : { enumerable : true,
-                  get : ()        => downstream.statusCode,    
+                  get : ()        => downstream.statusCode,
                   set : (status)  => downstream.statusCode = status }
     })
 
