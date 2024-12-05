@@ -53,7 +53,7 @@ export default class View
       body    : { enumerable: true, get: () => body, set: (value) => body = deepmerge(body, value) },
       // The stream property is a transform stream in object mode that by default encodes objects 
       // as stringified JSON data records according to HTML5 standard Server-Sent Events (SSE).
-      stream  : { enumerable: true, configurable: true, get: () => this.#lazyloadStream },
+      stream  : { enumerable: false, configurable: true, get: () => this.#lazyloadStream },
       // The headers property is an object that represents the response headers.
       headers : { enumerable: true, value: headers },
       // The session property has a reference to this view object, not enumerable because 
