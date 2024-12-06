@@ -230,29 +230,18 @@ await server.listen(3000);
 
 ### Custom Logging
 
-You can override the default logging methods to integrate with your logging system.
+You can override, or hook into, the default logging method to integrate reactions with your logging requirements.
 
-#### Turn Off Info Logs
+#### Turn of logs
 
-```javascript
-server.log.info = () => null;
+```
+server.log.config.mute = true
 ```
 
-#### Custom Error Logging
+#### Learn more
 
-```javascript
-server.log.error = (error) => {
-  // TODO: custom error logging logic...
-};
-```
+Read the github page for the repository this component depend on for logging: [@superhero/log](https://github.com/superhero/log).
 
-#### Turn Off Log Colors
-
-By default, the logger renders a colored output.
-
-```javascript
-server.log.format = server.log.simple;
-```
 
 ## API
 
