@@ -53,7 +53,7 @@ const locator = new Locator();
 const router = new Router(locator);
 
 // Instantiate the server
-const server = HttpServer(route);
+const server = new HttpServer(router);
 
 // Register the route dispatcher service
 locator.set('hello-dispatcher', {

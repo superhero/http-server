@@ -1,5 +1,6 @@
 import View     from '@superhero/http-server/view'
 import Router   from '@superhero/router'
+import Log      from '@superhero/log'
 import http     from 'node:http'
 import https    from 'node:https'
 import http2    from 'node:http2'
@@ -18,6 +19,8 @@ export function locate(locator)
  */
 export default class HttpServer
 {
+  log = new Log({ label: '[HTTP:SERVER]' })
+
   #sessions = new Set()
 
   constructor(router)
@@ -102,7 +105,7 @@ export default class HttpServer
 
       session.on('close', () => this.log.info`${session.id} ⇣ closed`)
       session.on('close', () => this.#sessions.delete(session))
-      session.on('error', this.log.error)
+      session.on('error', (error) => this.log.fail`${error}`)
       this.#sessions.add(session)
       this.log.info`${session.id} ⇡ session`
     }
@@ -382,7 +385,7 @@ export default class HttpServer
   #onRouterDispatchRejected(session, reason)
   {
     session.view.presentError(reason.cause)
-    this.log.error(reason)
+    this.log.fail`${reason}`
   }
 
   #onDownstreamError(reason)
@@ -390,7 +393,7 @@ export default class HttpServer
     const error = new Error('Downstream error')
     error.code  = 'E_HTTP_SERVER_DOWNSTREAM_ERROR'
     error.cause = reason
-    this.log.error(error)
+    this.log.fail`${error}`
   }
 
   #onUpstreamError(reason)
@@ -398,7 +401,7 @@ export default class HttpServer
     const error = new Error('Upstream error')
     error.code  = 'E_HTTP_SERVER_UPSTREAM_ERROR'
     error.cause = reason
-    this.log.error(error)
+    this.log.fail`${error}`
   }
 
   #onServerError(reason)
@@ -406,19 +409,6 @@ export default class HttpServer
     const error = new Error('Server error')
     error.code  = 'E_HTTP_SERVER_ERROR'
     error.cause = reason
-    this.log.error(error)
-  }
-
-  // Will make the log methods availible to overwrite 
-  // if a custom logging is desired.
-  log =
-  {
-    label   : '[HTTP:SERVER] ⇢ ',
-    simple  : (template, ...args) => this.log.label + template.reduce((result, part, i) => result + args[i - 1] + part),
-    colors  : (template, ...args) => '\x1b[90m\x1b[1m\x1b[2m' + this.log.label + '\x1b[22m' + template.reduce((result, part, i) => result + '\x1b[96m\x1b[2m' + args[i - 1] + '\x1b[90m' + part) + '\x1b[0m',
-    format  : (...args) => this.log.colors(...args),
-    info    : (...args) => console.info  (this.log.format(...args)),
-    warning : (...args) => console.warn  (this.log.format(...args)),
-    error   : (...args) => console.error (this.log.format`failure`, ...args)
+    this.log.fail`${error}`
   }
 }

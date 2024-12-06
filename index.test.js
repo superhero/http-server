@@ -33,7 +33,7 @@ suite('@superhero/http-server', () =>
     })
 
     server = locator.locate('@superhero/http-server')
-    server.log.info = () => null
+    server.log.config.mute = true
   })
 
   afterEach (() => 
@@ -327,12 +327,12 @@ suite('@superhero/http-server', () =>
 
         let errorLoggerCalled = false
 
-        server.log.error = (error) => 
+        server.log.on('fail', (_, error) => 
         {
           errorLoggerCalled = true
           assert.equal(error.code,        'E_ROUTER_DISPATCH_FAILED', 'Should throw router error')
           assert.equal(error.cause.code,  'E_TEST_FAILED_DISPATCHER', 'The error should have the dispatcher error as cause')
-        }
+        })
 
         const response = await request.get(`/test/foo`)
 
@@ -354,12 +354,12 @@ suite('@superhero/http-server', () =>
 
         let errorLoggerCalled = false
 
-        server.log.error = (error) => 
+        server.log.on('fail', (_, error) => 
         {
           errorLoggerCalled = true
           assert.equal(error.code,        'E_ROUTER_DISPATCH_FAILED')
           assert.equal(error.cause.code,  'E_HTTP_SERVER_VIEW_MODEL_PROPERTY_NOT_READABLE')
-        }
+        })
 
         const response = await request.get(`/test/foo`)
 
@@ -381,12 +381,12 @@ suite('@superhero/http-server', () =>
         
         let errorLoggerCalled = false
 
-        server.log.error = (error) => 
+        server.log.on('fail', (_, error) => 
         {
           errorLoggerCalled = true
           assert.equal(error.code,        'E_ROUTER_DISPATCH_FAILED')
           assert.equal(error.cause.code,  'E_HTTP_SERVER_VIEW_MODEL_PROPERTY_NOT_WRITABLE')
-        }
+        })
 
         const response = await request.get(`/test/foo`)
 
