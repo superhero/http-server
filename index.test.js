@@ -67,7 +67,8 @@ suite('@superhero/http-server', () =>
     test('Can be configured by the configuration file', async () =>
     {
       const config = new Config()
-      await config.add('./config.json')
+      const { filepath, config: resolved } = await config.resolve('./config.json')
+      config.add(filepath, resolved)
 
       assert.ok(config.find('bootstrap'))
       assert.ok(config.find('locator'))
