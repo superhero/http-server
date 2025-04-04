@@ -25,7 +25,7 @@ export default class StatusDispatcher
     session.view.body.started = this.started_json
 
     // Statistics 
-    if(request.query.stats)
+    if(request.url.query.stats)
     {
       session.view.body.dispatched = String(this.server.dispatched)
       session.view.body.completed  = String(this.server.completed)
@@ -34,13 +34,13 @@ export default class StatusDispatcher
     }
 
     // Uptime
-    if(request.query.uptime)
+    if(request.url.query.uptime)
     {
       session.view.body.uptime = String(this.started.getTime() - new Date().getTime())
     }
 
     // CPU usage
-    if(request.query.cpu)
+    if(request.url.query.cpu)
     {
       session.view.body.cpu = os.cpus().map((cpu) =>
       {
@@ -53,7 +53,7 @@ export default class StatusDispatcher
     }
 
     // RAM usage
-    if(request.query.ram)
+    if(request.url.query.ram)
     {
       const
         total = os.totalmem(),
