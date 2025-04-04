@@ -6,6 +6,7 @@
   "locator":
   {
     "@superhero/http-server": true,
+    "@superhero/http-server/dispatcher/*/": "./dispatcher/*.js",
     "@superhero/http-server/dispatcher/*/*": "./dispatcher/*/*.js",
     "@superhero/http-server/dispatcher/*/*/*": "./dispatcher/*/*/*.js",
     "@superhero/http-server/dispatcher/*/*/*/*/*": "./dispatcher/*/*/*/*/*.js"

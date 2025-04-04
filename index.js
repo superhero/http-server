@@ -1,12 +1,13 @@
-import View     from '@superhero/http-server/view'
-import Router   from '@superhero/router'
-import Log      from '@superhero/log'
-import http     from 'node:http'
-import https    from 'node:https'
-import http2    from 'node:http2'
-import net      from 'node:net'
-import tls      from 'node:tls'
-import { URL }  from 'node:url'
+import View           from '@superhero/http-server/view'
+import Router         from '@superhero/router'
+import Log            from '@superhero/log'
+import NameGenerator  from '@superhero/id-name-generator'
+import http           from 'node:http'
+import https          from 'node:https'
+import http2          from 'node:http2'
+import net            from 'node:net'
+import tls            from 'node:tls'
+import { URL }        from 'node:url'
 
 export function locate(locator)
 {
@@ -19,8 +20,21 @@ export function locate(locator)
  */
 export default class HttpServer
 {
-  log = new Log({ label: '[HTTP:SERVER]' })
+  // Name the server to easier be able to identify what logs 
+  // belong to what server in a clustered environment.
+  name = new NameGenerator().generateName().toUpperCase()
 
+  // Tracks request statistics
+  // BigInt used for large numbers
+  dispatched  = 0n
+  completed   = 0n
+  abortions   = 0n
+  rejections  = 0n
+
+  // Internal server log
+  log = new Log({ label: `[HTTP:SERVER:${this.name}]` })
+
+  // TCP sockets
   #sessions = new Set()
 
   constructor(router)
@@ -255,9 +269,10 @@ export default class HttpServer
     downstream.on('close', this.#onStreamClosed.bind(this, session))
     downstream.on('close', () => this.log.info`${requestID} ⇣ closed`)
 
+    this.dispatched++
     this.router.dispatch(request, session)
       .catch(this.#onRouterDispatchRejected.bind(this, session))
-      .then(session.view.present.bind(session.view))
+      .then(this.#onRouterDispatchCompleted.bind(this, session))
   }
 
   #bufferBody(upstream, request)
@@ -375,8 +390,15 @@ export default class HttpServer
     session.abortion.abort(error)
   }
 
+  #onRouterDispatchCompleted(session)
+  {
+    this.completed++
+    session.view.present()
+  }
+
   #onAbortedRequest(session)
   {
+    this.abortions++
     session.abortion.signal.reason instanceof Error
     ? session.view.presentError(session.abortion.signal.reason)
     : session.view.present()
@@ -384,6 +406,7 @@ export default class HttpServer
 
   #onRouterDispatchRejected(session, reason)
   {
+    this.rejections++
     session.view.presentError(reason.cause)
     this.log.fail`${reason}`
   }
