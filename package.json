@@ -1,6 +1,6 @@
 {
   "name": "@superhero/http-server",
-  "version": "4.3.5",
+  "version": "4.3.8",
   "description": "HTTP(S) server component supporting both HTTP 1.1 and HTTP 2.0",
   "keywords": [
     "http server",
@@ -25,11 +25,11 @@
   "dependencies": {
     "@superhero/router": "^4.1.4",
     "@superhero/deep": "^4.1.0",
-    "@superhero/log": "^4.0.1",
+    "@superhero/log": "^4.0.2",
     "@superhero/id-name-generator": "^4.0.0"
   },
   "devDependencies": {
-    "@superhero/locator": "^4.3.7",
+    "@superhero/locator": "^4.3.8",
     "@superhero/http-request": "^4.0.10"
   },
   "scripts": {

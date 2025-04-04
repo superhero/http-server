@@ -44,7 +44,9 @@ export default class HttpServer
 
   async bootstrap(settings)
   {
-    const 
+    Object.assign(this.log.config, settings?.log)
+
+    const
       routes         = settings?.router?.routes ?? {},
       serverSettings = Object.assign({}, settings?.server)
 
@@ -267,7 +269,7 @@ export default class HttpServer
 
     downstream.on('error', this.#onDownstreamError.bind(this))
     downstream.on('close', this.#onStreamClosed.bind(this, session))
-    downstream.on('close', () => this.log.info`${requestID} ⇣ closed`)
+    downstream.on('close', () => this.log.info`${requestID} ⇣ closed ${session.view.status} ${request.method} ${url.pathname}`)
 
     this.dispatched++
     this.router.dispatch(request, session)

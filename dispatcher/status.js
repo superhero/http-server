@@ -1,3 +1,5 @@
+import os from 'os'
+
 export function locate(locator)
 {
   const server = locator.locate('@superhero/http-server')
@@ -17,14 +19,48 @@ export default class StatusDispatcher
     this.server = server
   }
 
-  dispatch(_, session)
+  dispatch(request, session)
   {
-    session.view.name       = this.server.name
-    session.view.started    = started_json
-    session.view.uptime     = this.started.getTime() - new Date().getTime()
-    session.view.dispatched = String(this.server.dispatched)  + 'n'
-    session.view.completed  = String(this.server.completed)   + 'n'
-    session.view.abortions  = String(this.server.abortions)   + 'n'
-    session.view.rejections = String(this.server.rejections)  + 'n'
+    session.view.body.name    = this.server.name
+    session.view.body.started = this.started_json
+
+    // Statistics 
+    if(request.query.stats)
+    {
+      session.view.body.dispatched = String(this.server.dispatched)
+      session.view.body.completed  = String(this.server.completed)
+      session.view.body.abortions  = String(this.server.abortions)
+      session.view.body.rejections = String(this.server.rejections)
+    }
+
+    // Uptime
+    if(request.query.uptime)
+    {
+      session.view.body.uptime = String(this.started.getTime() - new Date().getTime())
+    }
+
+    // CPU usage
+    if(request.query.cpu)
+    {
+      session.view.body.cpu = os.cpus().map((cpu) =>
+      {
+        const
+          total = Object.values(cpu.times).reduce((a, b) => a + b, 0),
+          usage = Number(((total - cpu.times.idle) / total) * 100).toFixed(2)
+
+        return { total, usage }
+      })
+    }
+
+    // RAM usage
+    if(request.query.ram)
+    {
+      const
+        total = os.totalmem(),
+        free  = os.freemem(),
+        usage = Number((((total - free) / total) * 100).toFixed(2))
+
+      session.view.body.ram = { total, usage }
+    }
   }
 }
