@@ -1,6 +1,3 @@
-/**
- * @memberof @superhero/http-server:dispatcher/upstream
- */
 export default new class MethodUpstreamDispatcher
 {
   #listFormat = new Intl.ListFormat('en', { style:'long', type:'disjunction' })

@@ -6,9 +6,6 @@ export function locate(locator)
   return new StatusDispatcher(server)
 }
 
-/**
- * @memberof @superhero/http-server:dispatcher
- */
 export default class StatusDispatcher
 {
   started       = new Date()
@@ -24,7 +21,7 @@ export default class StatusDispatcher
     session.view.body.name    = this.server.name
     session.view.body.started = this.started_json
 
-    // Statistics 
+    // Statistics
     if(request.url.searchParams.get('stats'))
     {
       session.view.body.dispatched = String(this.server.dispatched)

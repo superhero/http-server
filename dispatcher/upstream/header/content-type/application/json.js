@@ -1,7 +1,5 @@
 /**
  * Does not validate headers, just assumes that the body is a JSON string
- * 
- * @memberof @superhero/http-server:dispatcher/upstream/header/content-type/application
  */
 export default new class ContentTypeApplicationJsonHeaderUpstreamDispatcher
 {

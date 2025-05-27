@@ -15,9 +15,6 @@ export function locate(locator)
   return new HttpServer(router)
 }
 
-/**
- * @memberof @superhero/http-server
- */
 export default class HttpServer
 {
   // Name the server to easier be able to identify what logs 

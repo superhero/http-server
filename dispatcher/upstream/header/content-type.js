@@ -1,6 +1,3 @@
-/**
- * @memberof @superhero/http-server:dispatcher/upstream/header
- */
 export default new class ContentTypeHeaderUpstreamDispatcher
 {
   #listFormat = new Intl.ListFormat('en', { style:'long', type:'disjunction' })
