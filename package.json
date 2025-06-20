@@ -1,6 +1,6 @@
 {
   "name": "@superhero/http-server",
-  "version": "4.4.7",
+  "version": "4.7.0",
   "description": "HTTP(S) server component supporting both HTTP 1.1 and HTTP 2.0",
   "keywords": [
     "http server",
@@ -22,18 +22,21 @@
     "./*/*/*/*/*": "./*/*/*/*/*.js",
     "./*/*/*/*/*/*": "./*/*/*/*/*/*.js"
   },
+  "scripts": {
+    "syntax-check": "syntax-check",
+    "test": "syntax-check; node --test --test-reporter=@superhero/audit/reporter --experimental-test-coverage"
+  },
   "dependencies": {
-    "@superhero/router": "^4.1.9",
-    "@superhero/deep": "^4.5.0",
-    "@superhero/log": "^4.0.2",
-    "@superhero/id-name-generator": "^4.0.0"
+    "@superhero/router": "4.7.0",
+    "@superhero/deep": "4.7.0",
+    "@superhero/log": "4.7.0",
+    "@superhero/id-name-generator": "4.7.0"
   },
   "devDependencies": {
-    "@superhero/locator": "^4.4.5",
-    "@superhero/http-request": "^4.0.10"
-  },
-  "scripts": {
-    "test": "node --trace-warnings --test --experimental-test-coverage"
+    "@superhero/audit": "4.7.0",
+    "@superhero/syntax-check": "0.0.2",
+    "@superhero/locator": "4.7.0",
+    "@superhero/http-request": "4.7.0"
   },
   "author": {
     "name": "Erik Landvall",
@@ -41,6 +44,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/superhero/http-server.git"
+    "url": "https://github.com/superhero/http-server.git"
   }
 }

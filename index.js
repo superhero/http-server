@@ -254,7 +254,7 @@ export default class HttpServer
       // non enumerable and non-configurable session properties
       downstream  : { value:downstream },
       upstream    : { value:upstream },
-      abortion    : { value:abortion }
+      abortion    : { value:abortion },
     })
 
     Object.defineProperty(session, 'view', { enumerable: true, value: new View(session) })
