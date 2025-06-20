@@ -135,13 +135,13 @@ suite('@superhero/http-server', () =>
 
       test('Support connection keep-alive header', async () => 
       {
+        locator.set('foo-dispatcher', { dispatch: () => null })
+
         server.router.setRoutes(
           { 'foo':
-            { criteria   : '/test/foo',
+            { condition  : '/test/foo',
               dispatcher : 'foo-dispatcher'
             }})
-
-        locator.set('foo-dispatcher', { dispatch: () => null })
 
         // Set the keep-alive timeout to 10 seconds on the server.
         const keepAlive = 10
@@ -172,18 +172,18 @@ suite('@superhero/http-server', () =>
     {
       test('Can dispatch a request aligned to the route map', async () => 
       {
-        server.router.setRoutes(
-          { 'foo':
-            { criteria   : '/test/foo',
-              dispatcher : 'foo-dispatcher'
-            },
-            'bar':
-            { criteria   : '/test/bar',
-              dispatcher : 'bar-dispatcher' }})
-
         let dispatched
         locator.set('foo-dispatcher', { dispatch: () => dispatched = 'foo' })
         locator.set('bar-dispatcher', { dispatch: () => dispatched = 'bar' })
+
+        server.router.setRoutes(
+          { 'foo':
+            { condition  : '/test/foo',
+              dispatcher : 'foo-dispatcher'
+            },
+            'bar':
+            { condition  : '/test/bar',
+              dispatcher : 'bar-dispatcher' }})
 
         const fooResponse = await request.get(`/test/foo`)
 
@@ -197,13 +197,13 @@ suite('@superhero/http-server', () =>
 
       test('Can alter the output body', async () => 
       {
-        server.router.setRoutes(
-          { 'foo':
-            { criteria   : '/test/foo',
-              dispatcher : 'foo-dispatcher' }})
-
         locator.set('foo-dispatcher', 
           { dispatch: (_, session) => session.view.body.foo = 'bar' })
+
+        server.router.setRoutes(
+          { 'foo':
+            { condition  : '/test/foo',
+              dispatcher : 'foo-dispatcher' }})
 
         const response = await request.get(`/test/foo`)
         assert.equal(response.status, 200, 'Should have received a 200 status')
@@ -212,11 +212,6 @@ suite('@superhero/http-server', () =>
 
       test('Can stream HTML5 standard Server-Sent Events (SSE)', async () => 
       {
-        server.router.setRoutes(
-          { 'sse':
-            { criteria   : '/test/sse',
-              dispatcher : 'sse-dispatcher' }})
-
         locator.set('sse-dispatcher', 
           { dispatch: (_, session) => 
             {
@@ -225,6 +220,11 @@ suite('@superhero/http-server', () =>
               session.view.stream.write({ baz: 'qux' })
               session.view.stream.end()
             }})
+
+        server.router.setRoutes(
+          { 'sse':
+            { condition  : '/test/sse',
+              dispatcher : 'sse-dispatcher' }})
 
         const response = await request.get(`/test/sse`)
 
@@ -237,14 +237,14 @@ suite('@superhero/http-server', () =>
 
       test('Can alter the output headers', async () => 
       {
-        server.router.setRoutes(
-          { 'foo':
-            { criteria   : '/test/foo',
-              dispatcher : 'foo-dispatcher' }})
-
         locator.set('foo-dispatcher', 
           { dispatch: (_, session) => session.view.headers.foo = 'bar' })
 
+        server.router.setRoutes(
+          { 'foo':
+            { condition  : '/test/foo',
+              dispatcher : 'foo-dispatcher' }})
+  
         const response = await request.get(`/test/foo`)
         assert.equal(response.status, 200, 'Should have received a 200 status')
         assert.equal(response.headers.foo, 'bar', 'Response header should have been altered')
@@ -252,28 +252,28 @@ suite('@superhero/http-server', () =>
 
       test('Can alter the output status', async () => 
       {
-        server.router.setRoutes(
-          { 'foo':
-            { criteria   : '/test/foo',
-              dispatcher : 'foo-dispatcher' }})
-
         locator.set('foo-dispatcher', 
           { dispatch: (_, session) => session.view.status = 204 })
 
+        server.router.setRoutes(
+          { 'foo':
+            { condition  : '/test/foo',
+              dispatcher : 'foo-dispatcher' }})
+  
         const response = await request.get(`/test/foo`)
         assert.equal(response.status, 204, 'Should have received a 204 status')
       })
 
       test('Can abort the dispatcher', async () => 
       {
-        server.router.setRoutes(
-          { 'foo':
-            { criteria   : '/test/foo',
-              dispatcher : 'foo-dispatcher' }})
-
         locator.set('foo-dispatcher', 
           { dispatch: (_, session) => session.abortion.abort(new Error('Aborted')) })
 
+        server.router.setRoutes(
+          { 'foo':
+            { condition  : '/test/foo',
+              dispatcher : 'foo-dispatcher' }})
+  
         const response = await request.get(`/test/foo`)
 
         assert.equal(response.status, 500, 'Should have failed with a 500 status')
@@ -282,11 +282,6 @@ suite('@superhero/http-server', () =>
 
       test('Can describe an abortion in detail', async () => 
       {
-        server.router.setRoutes(
-          { 'foo':
-            { criteria   : '/test/foo',
-              dispatcher : 'foo-dispatcher' }})
-
         locator.set('foo-dispatcher', 
         {
           dispatch: (_, session) => 
@@ -300,6 +295,11 @@ suite('@superhero/http-server', () =>
           }
         })
 
+        server.router.setRoutes(
+          { 'foo':
+            { condition  : '/test/foo',
+              dispatcher : 'foo-dispatcher' }})
+
         const response = await request.get(`/test/foo`)
 
         assert.equal(response.status, 500, 'Should have failed with a 500 status')
@@ -311,11 +311,6 @@ suite('@superhero/http-server', () =>
 
       test('Can manage thrown errors in the dispatcher', async () => 
       {
-        server.router.setRoutes(
-          { 'foo':
-            { criteria   : '/test/foo',
-              dispatcher : 'foo-dispatcher' }})
-
         locator.set('foo-dispatcher', 
         { 
           dispatch: () => 
@@ -325,6 +320,11 @@ suite('@superhero/http-server', () =>
             throw error
           }
         })
+
+        server.router.setRoutes(
+          { 'foo':
+            { condition  : '/test/foo',
+              dispatcher : 'foo-dispatcher' }})
 
         let errorLoggerCalled = false
 
@@ -345,14 +345,14 @@ suite('@superhero/http-server', () =>
 
       test('Can not mistakenly access the wrong view property', async () => 
       {
-        server.router.setRoutes(
-          { 'foo':
-            { criteria   : '/test/foo',
-              dispatcher : 'foo-dispatcher' }})
-
         locator.set('foo-dispatcher',
           { dispatch: (_, session) => session.view.invalidAttribute })
 
+        server.router.setRoutes(
+          { 'foo':
+            { condition  : '/test/foo',
+              dispatcher : 'foo-dispatcher' }})
+  
         let errorLoggerCalled = false
 
         server.log.on('fail', (_, error) => 
@@ -371,14 +371,13 @@ suite('@superhero/http-server', () =>
 
       test('Can not mistakenly assign a value to the wrong view property', async () => 
       {
-        server.router.setRoutes(
-          { 'foo':
-            { criteria   : '/test/foo',
-              dispatcher : 'foo-dispatcher' }})
-
         locator.set('foo-dispatcher',
           { dispatch: (_, session) => session.view.invalidAttribute = 'This should not be possible' })
 
+        server.router.setRoutes(
+          { 'foo':
+            { condition  : '/test/foo',
+              dispatcher : 'foo-dispatcher' }})
         
         let errorLoggerCalled = false
 
@@ -430,16 +429,16 @@ suite('@superhero/http-server', () =>
 
             fs.rmSync('test', { recursive: true, force: true })
 
+            locator.set('test-dispatcher', 
+              { dispatch: (_, session) => session.view.body.dispatched = true })
+
             await assert.doesNotReject(server.bootstrap(
               { server: { cert, key, minVersion: tlsVersion, maxVersion: tlsVersion }, 
                 router:
                 { routes:
                   { 'test':
-                    { criteria   : '/test',
+                    { condition  : '/test',
                       dispatcher : 'test-dispatcher' }}}}))
-
-            locator.set('test-dispatcher', 
-              { dispatch: (_, session) => session.view.body.dispatched = true })
 
             assert.ok(server.gateway      instanceof tls.Server)
             assert.ok(server.http1Server  instanceof https.Server)

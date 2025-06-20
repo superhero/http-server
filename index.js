@@ -231,17 +231,17 @@ export default class HttpServer
     this.log.info`${requestID} ⇡ request`
 
     const
-      session     = {},
-      request     = {},
-      url         = new URL(upstream.url, `${protocol}://${upstream.headers.host}`),
-      criteria    = url.pathname.replace(/\/+$/, ''), // removed trailing slashes
-      body        = this.#bufferBody(upstream, request),
-      abortion    = new AbortController
+      session   = {},
+      request   = {},
+      url       = new URL(upstream.url, `${protocol}://${upstream.headers.host}`),
+      condition = url.pathname.replace(/\/+$/, ''), // removed trailing slashes
+      body      = this.#bufferBody(upstream, request),
+      abortion  = new AbortController
 
     Object.defineProperties(request, 
     {
-      // configurable and writable criteria property
-      criteria    : { writable:true, configurable:true, value:criteria },
+      // configurable and writable condition property
+      condition   : { writable:true, configurable:true, value:condition },
       // configurable and writable stream data reader
       body        : { writable:true, configurable:true, value:body },
       // enumerable data readers, non-configurable 

@@ -1,7 +1,7 @@
 export default
 {
-  isdValid(request, session)
+  isValid(request, session)
   {
-    return [session.route['criteria.method']].flat().includes(request.method)
+    return [session.route['condition.method']].flat().includes(request.method)
   }
 }

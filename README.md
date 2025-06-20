@@ -67,7 +67,7 @@ const settings = {
   router: {
     routes: {
       hello: {
-        criteria: '/hello',
+        condition: '/hello',
         dispatcher: 'hello-dispatcher',
       },
     },
@@ -115,7 +115,7 @@ const serverSettings = {
   router: {
     routes: {
       secure: {
-        criteria: '/secure',
+        condition: '/secure',
         dispatcher: 'secure-dispatcher',
       },
     },
@@ -145,7 +145,7 @@ const settings = {
   router: {
     routes: {
       custom: {
-        criteria: '/custom',
+        condition: '/custom',
         dispatcher: 'custom-dispatcher',
       },
     },
@@ -174,7 +174,7 @@ const settings = {
   router: {
     routes: {
       abort: {
-        criteria: '/abort',
+        condition: '/abort',
         dispatcher: 'abort-dispatcher',
       },
     },
@@ -208,7 +208,7 @@ const settings = {
   router: {
     routes: {
       sse: {
-        criteria: '/sse',
+        condition: '/sse',
         dispatcher: 'sse-dispatcher',
       },
     },

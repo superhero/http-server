@@ -7,7 +7,7 @@ export default
       lowerCased  = header.toLowerCase(),
       accept      = lowerCased.split(';')[0].split('*')[0].trim()
 
-    return [session.route['criteria.accept']].flat().some(supported =>
+    return [session.route['condition.accept']].flat().some(supported =>
       supported.startsWith(accept) || accept.startsWith(supported.split('*')[0]))
   }
 }
