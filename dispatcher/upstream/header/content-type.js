@@ -27,8 +27,8 @@ export default new class ContentTypeHeaderUpstreamDispatcher
       {
         const 
           dispatcher  = session.route[route],
-          dispatchers = Array.isArray(dispatcher) ? dispatcher : [dispatcher],
-          uniqueList  = dispatchers.filter((item) => false === session.chain.dispatchers.includes(item))
+          dispatchers = [ dispatcher ].flat(),
+          uniqueList  = dispatchers.filter(item => false === session.chain.dispatchers.includes(item))
 
         // insert the forward routed dispatcher(s) after the current dispatcher in the chain 
         // for the dispatcher chain iterator to dispatch it/them next

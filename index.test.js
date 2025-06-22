@@ -418,7 +418,7 @@ suite('@superhero/http-server', () =>
       {
         for(const algorithm in algorithms)
         {
-          test(algorithm, async (sub) =>
+          test(algorithm, async sub =>
           {
             fs.mkdirSync('test', { recursive: true })
             execSync(algorithms[algorithm], { stdio: ['ignore', 'ignore', 'pipe'] })
@@ -433,7 +433,7 @@ suite('@superhero/http-server', () =>
               { dispatch: (_, session) => session.view.body.dispatched = true })
 
             await assert.doesNotReject(server.bootstrap(
-              { server: { cert, key, minVersion: tlsVersion, maxVersion: tlsVersion }, 
+              { server: { cert, key, minVersion: tlsVersion, maxVersion: tlsVersion },
                 router:
                 { routes:
                   { 'test':
