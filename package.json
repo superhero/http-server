@@ -1,6 +1,6 @@
 {
   "name": "@superhero/http-server",
-  "version": "4.7.10",
+  "version": "4.7.11",
   "description": "HTTP(S) server component supporting both HTTP 1.1 and HTTP 2.0",
   "keywords": [
     "http server",
@@ -27,16 +27,16 @@
     "test": "syntax-check; node --test --test-reporter=@superhero/audit/reporter --experimental-test-coverage"
   },
   "dependencies": {
-    "@superhero/router": "4.7.10",
-    "@superhero/deep": "4.7.10",
-    "@superhero/log": "4.7.10",
-    "@superhero/id-name-generator": "4.7.10"
+    "@superhero/router": "4.7.11",
+    "@superhero/deep": "4.7.11",
+    "@superhero/log": "4.7.11",
+    "@superhero/id-name-generator": "4.7.11"
   },
   "devDependencies": {
-    "@superhero/audit": "4.7.10",
+    "@superhero/audit": "4.7.11",
     "@superhero/syntax-check": "0.0.2",
-    "@superhero/locator": "4.7.10",
-    "@superhero/http-request": "4.7.10"
+    "@superhero/locator": "4.7.11",
+    "@superhero/http-request": "4.7.11"
   },
   "author": {
     "name": "Erik Landvall",
